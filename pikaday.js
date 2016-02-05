@@ -406,6 +406,9 @@
     renderTimePicker = function(num_options, selected_val, select_class, opts, display_func) {
         var to_return = '<td>';
         if (opts.useTimeInput && opts.use24hour) {
+            if (selected_val < 10) {
+                selected_val = '0'+selected_val;
+            }
             to_return += '<input type="text" value="'+selected_val+'" class="pika-select '+select_class+'" min="0" max="'+num_options+'">';
         } else {
             to_return += '<select class="pika-select '+select_class+'">';
