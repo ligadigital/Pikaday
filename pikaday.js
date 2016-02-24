@@ -413,7 +413,7 @@
         } else {
             to_return += '<select class="pika-select '+select_class+'">';
             for (var i=0; i<num_options; i++) {
-                to_return += '<option value="'+i+'" '+(i==selected_val ? 'selected' : '')+'>'+display_func(i)+'</option>'
+                to_return += '<option value="'+i+'" '+(i === Number(selected_val) ? 'selected' : '')+'>'+display_func(i)+'</option>';
             }
             to_return += '</select>';
         }
@@ -430,9 +430,9 @@
                     return i;
                 } else {
                     var to_return = (i%12) + (i<12 ? ' AM' : ' PM');
-                    if (to_return == '0 AM') {
+                    if (to_return === '0 AM') {
                         return opts.i18n.midnight;
-                    } else if (to_return == '0 PM') {
+                    } else if (to_return === '0 PM') {
                         return opts.i18n.noon;
                     } else {
                         return to_return;
@@ -440,11 +440,11 @@
                 }
             }) +
             '<td>:</td>' +
-            renderTimePicker(60, mm, 'pika-select-minute', opts, function(i) { if (i < 10) return "0" + i; return i });
+            renderTimePicker(60, mm, 'pika-select-minute', opts, function(i) { if (i < 10) return '0' + i; return i; });
 
         if (opts.showSeconds) {
             to_return += '<td>:</td>' +
-                renderTimePicker(60, ss, 'pika-select-second', opts, function(i) { if (i < 10) return "0" + i; return i });
+                renderTimePicker(60, ss, 'pika-select-second', opts, function(i) { if (i < 10) return '0' + i; return i; });
         }
         return to_return + '</tr></tbody></table>';
     },
@@ -557,7 +557,7 @@
                 date = new Date(Date.parse(opts.field.value));
             }
             if (isDate(date)) {
-              self.setDate(date)
+              self.setDate(date);
             }
             if (!self._v) {
                 self.show();
@@ -691,7 +691,7 @@
 
             opts.field = (opts.field && opts.field.nodeName) ? opts.field : null;
 
-            opts.theme = (typeof opts.theme) == 'string' && opts.theme ? opts.theme : null;
+            opts.theme = (typeof opts.theme) === 'string' && opts.theme ? opts.theme : null;
 
             opts.bound = !!(opts.bound !== undefined ? opts.field && opts.bound : opts.field);
 
@@ -699,7 +699,7 @@
 
             opts.disableWeekends = !!opts.disableWeekends;
 
-            opts.disableDayFn = (typeof opts.disableDayFn) == "function" ? opts.disableDayFn : null;
+            opts.disableDayFn = (typeof opts.disableDayFn) === 'function' ? opts.disableDayFn : null;
 
             var nom = parseInt(opts.numberOfMonths, 10) || 1;
             opts.numberOfMonths = nom > 4 ? 4 : nom;
@@ -998,8 +998,8 @@
                             this._d ? this._d.getHours() : 0,
                             this._d ? this._d.getMinutes() : 0,
                             this._d ? this._d.getSeconds() : 0,
-                            opts)
-                    + '</div>';
+                            opts) +
+                    '</div>';
             }
 
             this.el.innerHTML = html;
