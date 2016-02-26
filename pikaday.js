@@ -968,6 +968,11 @@
             if (!this._v && !force) {
                 return;
             }
+
+            var activeClass = document.activeElement
+              .getAttribute('class')
+              .match(/(pika-select-[^ ]+)/);
+
             var opts = this._o,
                 minYear = opts.minYear,
                 maxYear = opts.maxYear,
@@ -1017,6 +1022,13 @@
                 sto(function() {
                     self._o.onDraw.call(self);
                 }, 0);
+            }
+
+            if (activeClass) {
+                var activeElement = document.querySelector('.' + activeClass[1]);
+                if (activeElement) {
+                    activeElement.focus();
+                }
             }
         },
 
