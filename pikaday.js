@@ -969,9 +969,9 @@
                 return;
             }
 
-            var activeClass = document.activeElement
-              .getAttribute('class')
-              .match(/(pika-select-[^ ]+)/);
+            var activeClass = document.activeElement.getAttribute
+                ? document.activeElement.getAttribute('class').match(/(pika-select-[^ ]+)/)
+                : null;
 
             var opts = this._o,
                 minYear = opts.minYear,
